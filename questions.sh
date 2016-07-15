@@ -20,3 +20,8 @@ DATE=`date`
 
 ANSWERS="$ans1,$ans2,$ans3,$ans4,$ans5,$DATE"
 echo $ANSWERS >> eureka.csv
+
+mysql -u root -p << EOF
+USE questionnaire;
+LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+EOF
