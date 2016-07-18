@@ -21,6 +21,7 @@ DATE=`date`
 ANSWERS="$ans1,$ans2,$ans3,$ans4,$ans5,$DATE"
 echo $ANSWERS >> eureka.csv
 
+<<<<<<< HEAD
 mysql -u root -p << EOF
 CREATE DATABASE IF NOT EXISTS questionnaire;
 USE questionnaire;
@@ -29,3 +30,12 @@ CREATE TEMPORARY TABLE temporary_table LIKE questionnaire;
 LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE temporary_table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
 LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
 EOF
+=======
+mysql -u root -p -D -e "LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ','"
+
+
+#mysql -u root -p << EOF
+#USE questionnaire;
+#LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+#EOF
+>>>>>>> 9f3a1577947298bf53df52669715e8f19607388a
