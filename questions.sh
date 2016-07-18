@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# May want to ask user name first
 echo Hello, what is your github user name?
 read ans1
 
@@ -21,21 +20,13 @@ DATE=`date`
 ANSWERS="$ans1,$ans2,$ans3,$ans4,$ans5,$DATE"
 echo $ANSWERS >> eureka.csv
 
-<<<<<<< HEAD
 mysql -u root -p << EOF
 CREATE DATABASE IF NOT EXISTS questionnaire;
 USE questionnaire;
 CREATE TABLE IF NOT EXISTS questionnaire (Username VARCHAR(15), Distance DECIMAL(5,2), Year INT, Commute VARCHAR(3), Learned VARCHAR(3), Date VARCHAR(30), PRIMARY KEY (Date));
 CREATE TEMPORARY TABLE temporary_table LIKE questionnaire;
 LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE temporary_table FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
-LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
+INSERT INTO questionnaire SELECT Username, Distance, Year, Commute, Learned, Date FROM temporary_table
 EOF
-=======
-mysql -u root -p -D -e "LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ','"
 
 
-#mysql -u root -p << EOF
-#USE questionnaire;
-#LOAD DATA INFILE '/home/cabox/workspace/task-5-database-interface/eureka.csv' INTO TABLE questionnaire FIELDS TERMINATED BY ',' OPTIONALLY ENCLOSED BY '"';
-#EOF
->>>>>>> 9f3a1577947298bf53df52669715e8f19607388a
